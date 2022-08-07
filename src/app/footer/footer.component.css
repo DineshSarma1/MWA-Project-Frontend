@@ -1,0 +1,13 @@
+.footer {
+   background-color: rgb(238, 144, 182);
+   position:relative;
+   bottom:0;
+   width:100%;
+   height:15px;
+   text-align: center;
+   padding: 20px;
+}
+
+.span-text {
+    color: aliceblue;
+}

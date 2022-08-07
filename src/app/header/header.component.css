@@ -1,4 +1,12 @@
 .container {
     margin: 10px;
-    min-height: 500px;
+    /* min-height: 450px; */
+}
+
+.flexExpand {
+    flex: 1 1 auto;
+}
+
+.flexSpaceBetween {
+    justify-content: space-between;
 }

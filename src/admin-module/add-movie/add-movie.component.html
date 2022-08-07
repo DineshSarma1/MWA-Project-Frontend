@@ -1,0 +1,246 @@
+<div class="example-container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    <fieldset>
+      <legend>Movie Info</legend>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Title"
+          name="title"
+          formControlName="title"
+          required
+        />
+        <mat-error> Please provide a Movie title </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Movie Length"
+          name="length"
+          formControlName="length"
+          required
+        />
+        <mat-error> Please provide a valid email address </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Release date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="release_date"
+          name="release_date"
+          required
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Move Type</mat-label>
+        <mat-select multiple formControlName="movieType" name="movieType">
+          <mat-option *ngFor="let type of movieTypeList" [value]="type">{{
+            type
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Description"
+          name="description"
+          formControlName="description"
+          required
+        />
+        <mat-error> Movie Description </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Image Url"
+          name="image"
+          formControlName="image"
+          required
+        />
+        <mat-error> Movie Description </mat-error>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset>
+      <legend>Director Information</legend>
+      <ng-container formGroupName="director">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Director name"
+            name="name"
+            formControlName="name"
+            required
+          />
+          <mat-error> Director name </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Director Date of Birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerdbo"
+            formControlName="born_date"
+            name="born_date"
+            required
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerdbo"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerdbo></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Birth Place"
+            name="born_place"
+            formControlName="born_place"
+            required
+          />
+          <mat-error> Contact </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Contact Email"
+            name="contact"
+            formControlName="contact"
+            required
+          />
+          <mat-error> Movie Description </mat-error>
+        </mat-form-field>
+      </ng-container>
+    </fieldset>
+    <fieldset>
+      <legend>
+        Movie Writer
+        <a mat-raised-button (click)="addWriterField()">Add</a>
+      </legend>
+      <ng-container
+        formArrayName="writers"
+        *ngFor="let contact of writers.controls; index as i"
+      >
+        <ng-container [formGroupName]="i">
+          <mat-form-field>
+            <input
+              formControlName="name"
+              matInput
+              placeholder="Writer name"
+              name="Writer name"
+            />
+            <mat-error> Writer name </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="writerdbo"
+              formControlName="born_date"
+              name="born_date"
+              required
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="writerdbo"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #writerdbo></mat-datepicker>
+
+            <mat-error> Writer name </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="born_place"
+              matInput
+              placeholder="Birth Place"
+              name="Birth Place"
+            />
+            <mat-error> Writer name </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="contact"
+              matInput
+              placeholder="Email"
+              name="Email"
+            />
+            <mat-error> Writer name </mat-error>
+          </mat-form-field>
+
+          <a type="button" (click)="removeWritersField(i)">x</a>
+        </ng-container>
+      </ng-container>
+    </fieldset>
+
+    <fieldset>
+      <legend>
+        Movie Actor
+        <a mat-raised-button (click)="addActorField()">Add</a>
+      </legend>
+      <ng-container
+        formArrayName="actors"
+        *ngFor="let actor of actors.controls; index as i"
+      >
+        <ng-container [formGroupName]="i">
+          <mat-form-field>
+            <input
+              formControlName="name"
+              matInput
+              placeholder="Actor name"
+              name="Actor name"
+            />
+            <mat-error> Writer name </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="actordbo"
+              formControlName="born_date"
+              name="born_date"
+              required
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="actordbo"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #actordbo></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="born_place"
+              matInput
+              placeholder="Birth Place"
+              name="Birth Place"
+            />
+            <mat-error> Birth Place</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="contact"
+              matInput
+              placeholder="Email"
+              name="EMail"
+            />
+            <mat-error> Birth Place</mat-error>
+          </mat-form-field>
+          <a class="btn-remove" type="button" (click)="removeActorField(i)"
+            >x</a
+          >
+        </ng-container>
+      </ng-container>
+    </fieldset>
+
+    <button mat-raised-button color="accent">Save</button>
+  </form>
+</div>

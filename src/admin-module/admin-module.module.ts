@@ -2,23 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminModuleRoutingModule } from './admin-module-routing.module';
-import { MovieTypeComponent } from './movie-type/movie-type.component';
-import { ActorComponent } from './actor/actor.component';
-import { MatSliderModule } from '@angular/material/slider';
-import { DirectorComponent } from './director/director.component';
-import { WriterComponent } from './writer/writer.component';
+import { AddMovieComponent } from './add-movie/add-movie.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/shared/material.module';
 
 @NgModule({
-  declarations: [
-    MovieTypeComponent,
-    ActorComponent,
-    DirectorComponent,
-    WriterComponent
-  ],
+  declarations: [AddMovieComponent, UserListComponent],
   imports: [
     CommonModule,
     AdminModuleRoutingModule,
-    MatSliderModule
-  ]
+    MaterialModule,
+    ReactiveFormsModule,
+  ],
 })
-export class AdminModuleModule { }
+export class AdminModuleModule {}

@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { MaterialModule } from 'src/shared/material.module';
 import { CommonModuleRoutingModule } from './common-module-routing.module';
-
-
+import { MovieListComponent } from './movie-list/movie-list.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [],
+  declarations: [MovieListComponent, MovieDetailsComponent],
   imports: [
     CommonModule,
-    CommonModuleRoutingModule
-  ]
+    CommonModuleRoutingModule,
+    MaterialModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+  ],
 })
-export class CommonModuleModule { }
+export class CommonModuleModule {}
