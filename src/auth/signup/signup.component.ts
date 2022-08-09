@@ -64,14 +64,15 @@ export class SignupComponent implements OnInit {
         password: form.value.password,
         dbo: form.value.password,
         interests: form.value.interests,
+        authType: 'User',
       };
       this.api.postData(environment.registration, data).subscribe(
         (res) => {
-          console.log(res);
           if (!res.success) {
             this.errorMessage = res.message;
             this.isVaildUser = res.success;
           } else {
+            localStorage.setItem('userToken', res.payload);
             this.router.navigate(['/common']);
           }
         },

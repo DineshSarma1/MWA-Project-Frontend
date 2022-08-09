@@ -9,18 +9,8 @@ export class AuthService {
   constructor(private router: Router) {}
 
   isLoggedIn() {
-    const loginData = JSON.stringify(localStorage.getItem('userToken'));
+    const loginData = localStorage.getItem('userToken');
     if (loginData) {
-      //   const dateNow = new Date();
-      //   // loginData.expires_in
-      // const expireDate = new Date();
-      // if (expireDate >= dateNow) {
-      //   return !!localStorage.getItem('token');
-      // }
-      // else {
-      //   this.removeToken();
-      //   return false;
-      // }
       return true;
     } else {
       return false;

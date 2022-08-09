@@ -4,7 +4,6 @@ import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CommonService } from 'src/service/common.service';
 import { environment } from '../../environments/environment';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class LoginComponent implements OnInit {
   hide = true;
   myForm: any;
-  returnUrl: string = '';
+  // returnUrl: string = '';
   errorMessage: string = '';
   isVaildUser: boolean = true;
   constructor(
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   onSubmit(form: FormGroup) {
     console.log('Valid?', form.valid);
@@ -51,6 +50,10 @@ export class LoginComponent implements OnInit {
               this.errorMessage = res.message;
               this.isVaildUser = res.success;
             } else {
+              console.log(res);
+              localStorage.setItem('userToken', res.payload);
+              // this.headerComponent.isLogin = true;
+              this.router.navigate(['/common']);
             }
             //this.router.navigate([this.returnUrl]);
           },

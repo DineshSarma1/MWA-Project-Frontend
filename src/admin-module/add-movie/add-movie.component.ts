@@ -59,9 +59,10 @@ export class AddMovieComponent implements OnInit {
       title: '',
       length: '',
       release_date: '',
-      movieType: '',
+      movie_type: '',
       description: '',
       image: '',
+      video: '',
       director: this.formBuilder.group({
         name: '',
         born_date: '',

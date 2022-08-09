@@ -1,25 +1,35 @@
 <mat-toolbar class="flexSpaceBetween" color="accent">
-    <mat-toolbar-row>
-      <button mat-icon-button>
+  <mat-toolbar-row>
+    <button mat-icon-button></button>
+    <a mat-button [routerLink]="['/']">
+      <mat-icon>home</mat-icon>
+    </a>
+    <a mat-button [routerLink]="['/admin/add-movie']" *ngIf="isLogin">
+      Add Movie
+    </a>
+    <a mat-button [routerLink]="['/common']"> Movie </a>
+    <a mat-button [routerLink]="['/admin/user']"> User </a>
+    <span class="flexExpand"></span>
+    <div *ngIf="!isLogin">
+      <button mat-button [matMenuTriggerFor]="belowMenu">
+        <mat-icon fontIcon="account_circle"></mat-icon>
+        Sign In
       </button>
-      <a mat-button [routerLink]="['/']">
-        <mat-icon>home</mat-icon>
+      <mat-menu #belowMenu="matMenu" yPosition="below">
+        <a mat-menu-item [routerLink]="['/auth/login']">
+          <!-- <mat-icon fontIcon="account_circle"></mat-icon> -->
+          <mat-icon>power_settings_new</mat-icon>
+          Login
+        </a>
+        <a mat-menu-item [routerLink]="['/auth/signup']">
+          <mat-icon fontIcon="account_circle"></mat-icon> Sign up
+        </a>
+      </mat-menu>
+    </div>
+    <div *ngIf="isLogin">
+      <a mat-button (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon> Logout
       </a>
-        <a mat-button [routerLink]="['/admin/add-movie']"> Add Movie </a>
-        <a mat-button [routerLink]="['/admin/user']"> User </a>
-        <span class="flexExpand"></span>
-        <div>
-            <button mat-button [matMenuTriggerFor]="belowMenu">
-                <mat-icon fontIcon="account_circle"></mat-icon>
-                Sign In
-            </button>
-            <mat-menu #belowMenu="matMenu" yPosition="below">
-                <a mat-menu-item [routerLink]="['/auth/login']"> 
-                    <!-- <mat-icon fontIcon="account_circle"></mat-icon> -->
-                    <mat-icon>power_settings_new</mat-icon>
-                    Login </a>
-                <a mat-menu-item [routerLink]="['/auth/signup']"> <mat-icon fontIcon="account_circle"></mat-icon>Signup </a>
-            </mat-menu>
-        </div>
-    </mat-toolbar-row>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>

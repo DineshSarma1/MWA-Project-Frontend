@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/service/common.service';
 import { environment } from '../../environments/environment';
+
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -11,10 +13,12 @@ import { environment } from '../../environments/environment';
 export class MovieListComponent implements OnInit {
   movies: any = [];
   errorMessage = '';
+  // rating = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private api: CommonService
+    private api: CommonService,
+    private dataService: DataService
   ) {}
 
   ngOnInit(): void {
@@ -30,13 +34,17 @@ export class MovieListComponent implements OnInit {
         } else {
           this.movies = res.payload;
         }
-        //this.router.navigate([this.returnUrl]);
       },
       (error) => {}
     );
   }
 
   onDetails(movie: any) {
-    this.router.navigateByUrl('/movie-details', { state: { movie: movie } });
+    this.dataService.movieData(movie);
+    this.router.navigateByUrl('common/movie-details');
+  }
+
+  countRating(d: number) {
+    // return (this.rating += d);
   }
 }

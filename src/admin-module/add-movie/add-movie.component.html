@@ -31,6 +31,7 @@
           formControlName="release_date"
           name="release_date"
           required
+          (focus)="picker.open()"
         />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -39,7 +40,7 @@
 
       <mat-form-field>
         <mat-label>Move Type</mat-label>
-        <mat-select multiple formControlName="movieType" name="movieType">
+        <mat-select multiple formControlName="movie_type" name="movie_type">
           <mat-option *ngFor="let type of movieTypeList" [value]="type">{{
             type
           }}</mat-option>
@@ -59,12 +60,22 @@
       <mat-form-field>
         <input
           matInput
+          placeholder="Video Url"
+          name="video"
+          formControlName="video"
+          required
+        />
+        <mat-error> Image Url </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
           placeholder="Image Url"
           name="image"
           formControlName="image"
           required
         />
-        <mat-error> Movie Description </mat-error>
+        <mat-error> Image Url </mat-error>
       </mat-form-field>
     </fieldset>
 
@@ -90,6 +101,7 @@
             formControlName="born_date"
             name="born_date"
             required
+            (focus)="pickerdbo.open()"
           />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
@@ -148,6 +160,7 @@
               formControlName="born_date"
               name="born_date"
               required
+              (focus)="writerdbo.open()"
             />
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle
@@ -208,6 +221,7 @@
               formControlName="born_date"
               name="born_date"
               required
+              (focus)="actordbo.open()"
             />
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle

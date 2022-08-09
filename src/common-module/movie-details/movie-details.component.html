@@ -1,65 +1,143 @@
 <div class="content">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" >
-        <mat-card class="mat-elevation-z4" >
-          <img height="250" mat-card-image src="https://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg">
-          <mat-card-header>
-            <mat-card-title>Mountains </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <span style="color: rgb(240, 199, 13);">
-                <mat-icon>star</mat-icon>
-            </span>
-            <label style="font-size: 20px;"> 8.2 </label>
-            <span style="color: rgb(29, 140, 209);">
-                <mat-icon>star_border</mat-icon>
-            </span>
-            <span style="color: rgb(222, 27, 203);">
-                <mat-icon>favorite_border</mat-icon>
-            </span>
-            
-            <p>
-              The Himalayas is a mountain range in Asia.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="accent">LIKE</button>
-    <button mat-raised-button color="primary">SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="40%" fxFlex.xs="40%" fxFlex.sm="40%">
+      <mat-card class="mat-elevation-z4">
+        <img height="300" mat-card-image src="{{ movie.image }}" />
+        <mat-card-header>
+          <mat-card-title>{{ movie.title }} </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <span style="color: rgb(240, 199, 13)">
+            <mat-icon>star</mat-icon>
+          </span>
+          <label style="font-size: 20px"> 8.2 </label>
+          <span style="color: rgb(29, 140, 209)">
+            <mat-icon>star_border</mat-icon>
+          </span>
+          <span style="color: rgb(222, 27, 203)">
+            <mat-icon>favorite_border</mat-icon>
+          </span>
+          <h5>Release Date: {{ movie.release_date | date }}</h5>
+          <h6>Duration: {{ movie.length }}</h6>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent">LIKE</button>
+          <button mat-raised-button color="primary">SHARE</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
+    <div fxFlex="60%" fxFlex.xs="60%" fxFlex.sm="60%">
+      <mat-card class="mat-elevation-z4">
+        <iframe
+          [src]="movie.video | safe"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          height="350"
+          width="100%"
+        ></iframe>
+        <mat-card-header>
+          <mat-card-title>
+            <!-- {{ movie.title }} -->
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <hr />
+          <p>{{ movie.description }}</p>
+          <hr />
+          <p>
+            Movie Type:
+            <span *ngFor="let t of movie.movie_type">
+              <a mat-stroked-button color="accent">
+                {{ t }}
+              </a>
+              &nbsp;
+            </span>
+          </p>
+          <hr />
+          <p>
+            Director:
+            <a
+              mat-stroked-button
+              color="accent"
+              (click)="openDialog(movie.director, 'Director')"
+              >{{ movie.director.name }}</a
+            >
+          </p>
+          <hr />
+          <p>
+            Writers:
+            <span *ngFor="let w of movie.writers">
+              {{ w.name }}
+              <a
+                mat-stroked-button
+                color="accent"
+                (click)="openDialog(w, 'Writer')"
+                >{{ w.name }}</a
+              >
+              &nbsp;
+            </span>
+          </p>
+          <hr />
+          <p>
+            Actors:
+            <span *ngFor="let a of movie.actors">
+              <a
+                mat-stroked-button
+                color="accent"
+                (click)="openDialog(a, 'Actor')"
+                >{{ a.name }}</a
+              >
+              &nbsp;
+            </span>
+          </p>
+          <hr />
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-raised-button color="accent">LIKE</button>
+          <button mat-raised-button color="primary">SHARE</button> -->
+        </mat-card-actions>
+      </mat-card>
     </div>
+  </div>
+</div>
 
-    <div class="content">
-        <div fxLayout="row wrap" fxLayoutGap="16px grid">
-          <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5]">
-            <mat-card class="mat-elevation-z4" >
-              <img height="250" mat-card-image src="https://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg">
-              <mat-card-header>
-                <mat-card-title>Mountains {{num}}</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <span style="color: rgb(240, 199, 13);">
-                    <mat-icon>star</mat-icon>
-                </span>
-                <label style="font-size: 20px;"> 8.2 </label>
-                <span style="color: rgb(29, 140, 209);">
-                    <mat-icon>star_border</mat-icon>
-                </span>
-                <span style="color: rgb(222, 27, 203);">
-                    <mat-icon>favorite_border</mat-icon>
-                </span>
-                
-                <p>
-                  The Himalayas is a mountain range in Asia.
-                </p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-raised-button color="accent">LIKE</button>
-        <button mat-raised-button color="primary">SHARE</button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
-        </div>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      fxFlex="20%"
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngFor="let num of [1, 2, 3, 4, 5]"
+    >
+      <mat-card class="mat-elevation-z4">
+        <img
+          height="250"
+          mat-card-image
+          src="https://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        />
+        <mat-card-header>
+          <mat-card-title>Mountains {{ num }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <span style="color: rgb(240, 199, 13)">
+            <mat-icon>star</mat-icon>
+          </span>
+          <label style="font-size: 20px"> 8.2 </label>
+          <span style="color: rgb(29, 140, 209)">
+            <mat-icon>star_border</mat-icon>
+          </span>
+          <span style="color: rgb(222, 27, 203)">
+            <mat-icon>favorite_border</mat-icon>
+          </span>
+
+          <p>The Himalayas is a mountain range in Asia.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent">LIKE</button>
+          <button mat-raised-button color="primary">SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

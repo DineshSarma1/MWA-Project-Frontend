@@ -1,0 +1,15 @@
+<mat-card>
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  <mat-card-title>
+    <h1 mat-dialog-title>{{ person.personType }} Details</h1>
+  </mat-card-title>
+  <img height="250" mat-card-image src="../../assets/images/images.png" />
+  <mat-card-title> Name: {{ person.name }} </mat-card-title>
+  <mat-card-content>
+    <p>Date of Birth: {{ person.born_date | date }}</p>
+    <p>Birth Place: {{ person.born_place }}</p>
+    <p>Contact: {{ person.contact }}</p>
+  </mat-card-content>
+</mat-card>
