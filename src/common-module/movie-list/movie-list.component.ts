@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/service/common.service';
 import { environment } from '../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../service/data.service';
 import { MovieRatingComponent } from '../movie-rating/movie-rating.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -12,6 +13,29 @@ import { MovieRatingComponent } from '../movie-rating/movie-rating.component';
 })
 export class MovieListComponent implements OnInit {
   movies: any = [];
+  typeList: string[] = [
+    'Action',
+    'Adventure',
+    'Animation',
+    'Biography',
+    'Comedy',
+    'Crime',
+    'Drama',
+    'Family',
+    'Fantasy',
+    'Film-Noir',
+    'History',
+    'Horror',
+    'Music',
+    'Musical',
+    'Mystery',
+    'Romance',
+    'Sci-Fi',
+    'Sport',
+    'Thriller',
+    'War',
+    'Western',
+  ];
   errorMessage = '';
   // rating = 0;
   constructor(
@@ -19,7 +43,8 @@ export class MovieListComponent implements OnInit {
     private router: Router,
     private api: CommonService,
     private dataService: DataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +95,28 @@ export class MovieListComponent implements OnInit {
       output += rating[i].rating_point;
     }
     return output / rating.length;
+  }
+
+  dropdownOnChange(type: string) {
+    debugger;
+    this.api.getData(environment.movieByMovieType + type).subscribe(
+      (res) => {
+        console.log(res);
+        if (!res.success) {
+          this.openSnackBar('Movie not found for ' + type, 'Not Found!');
+        } else {
+          this.movies = res.payload;
+        }
+      },
+      (error) => {}
+    );
+  }
+
+  openSnackBar(message: string, status: string) {
+    this._snackBar.open(message, status, {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 3000,
+    });
   }
 }

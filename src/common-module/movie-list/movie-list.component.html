@@ -1,4 +1,12 @@
 <div class="content">
+  <mat-form-field>
+    <mat-label>Movie Type</mat-label>
+    <mat-select (selectionChange)="dropdownOnChange($event.value)">
+      <mat-option *ngFor="let type of typeList" [value]="type">
+        {{ type }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div
       fxFlex="20%"

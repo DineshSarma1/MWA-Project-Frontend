@@ -8,7 +8,7 @@
       Add Movie
     </a>
     <a mat-button [routerLink]="['/common']"> Movie </a>
-    <a mat-button [routerLink]="['/admin/user']"> User </a>
+    <a mat-button [routerLink]="['/admin/user']" *ngIf="isLogin"> User </a>
     <span class="flexExpand"></span>
     <div *ngIf="!isLogin">
       <button mat-button [matMenuTriggerFor]="belowMenu">
