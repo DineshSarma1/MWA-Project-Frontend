@@ -1,0 +1,19 @@
+<mat-card>
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  <mat-card-title>
+    <h1 mat-dialog-title>
+      Movie Rating for <span style="color: #757df0">{{ movieInfo.title }}</span>
+    </h1>
+  </mat-card-title>
+  <mat-card-title>
+    <span *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+      <a (click)="ratingSelect(number)" [mat-dialog-close]="true">
+        <mat-icon matBadge="{{ number }}">star_border</mat-icon>
+      </a>
+      &nbsp;
+    </span>
+  </mat-card-title>
+  <mat-card-content> </mat-card-content>
+</mat-card>

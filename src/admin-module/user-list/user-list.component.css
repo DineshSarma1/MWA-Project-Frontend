@@ -1,0 +1,13 @@
+/* .content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    width: 200px;
+} */
+
+mat-card {
+    width: 200px;
+    height: 250px;
+    /* margin: 10px; */
+}

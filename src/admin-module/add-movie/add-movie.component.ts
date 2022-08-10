@@ -4,6 +4,11 @@ import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { CommonService } from 'src/service/common.service';
 import { environment } from '../../environments/environment';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-movie',
@@ -11,6 +16,8 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./add-movie.component.css'],
 })
 export class AddMovieComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   myForm: any;
   errorMessage: string = '';
   movieTypeList: string[] = [
@@ -51,7 +58,8 @@ export class AddMovieComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private api: CommonService
+    private api: CommonService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +71,7 @@ export class AddMovieComponent implements OnInit {
       description: '',
       image: '',
       video: '',
+      ratings: [],
       director: this.formBuilder.group({
         name: '',
         born_date: '',
@@ -85,7 +94,9 @@ export class AddMovieComponent implements OnInit {
         console.log(res);
         if (!res.success) {
           this.errorMessage = res.message;
+          this.openSnackBar(res.message);
         } else {
+          this.openSnackBar(res.message);
           this.router.navigate(['/common']);
         }
       },
@@ -132,5 +143,13 @@ export class AddMovieComponent implements OnInit {
       this.actors.patchValue([
         { name: '', born_date: '', born_place: '', contact: '' },
       ]);
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, status, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+    });
   }
 }

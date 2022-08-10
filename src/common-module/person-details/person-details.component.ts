@@ -15,7 +15,6 @@ export class PersonDetailsComponent implements OnInit {
 
   getPerson() {
     this.personService.data.subscribe((res) => {
-      console.log(res);
       this.person = res;
     });
   }

@@ -5,34 +5,30 @@ import { Observable } from 'rxjs';
 import { ResponseData } from '../__models/ResponseData';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommonService {
-
-  constructor(
-    private httpclient: HttpClient,
-    private authServe: AuthService
-  ) { }
+  constructor(private httpclient: HttpClient, private authServe: AuthService) {}
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + this.authServe.getToken()
-    })
+      Authorization: 'Bearer ' + this.authServe.getToken(),
+    }),
   };
 
   httpOptionsImage = {
     headers: new HttpHeaders({
       'Content-Type': {} as any,
-      Authorization: 'Bearer ' + this.authServe.getToken()
-    })
+      Authorization: 'Bearer ' + this.authServe.getToken(),
+    }),
   };
 
   getData(url: string): Observable<ResponseData> {
     return this.httpclient.get<ResponseData>(url, this.httpOptions);
   }
 
-  getDataPara(url : string, data: any): Observable<ResponseData> {
+  getDataPara(url: string, data: any): Observable<ResponseData> {
     return this.httpclient.get<ResponseData>(url + data, this.httpOptions);
   }
 
@@ -42,5 +38,10 @@ export class CommonService {
 
   postDataImage(url: string, data: any): Observable<ResponseData> {
     return this.httpclient.post<ResponseData>(url, data, this.httpOptionsImage);
+  }
+
+  putData(url: string, data: any): Observable<ResponseData> {
+    console.log(url);
+    return this.httpclient.put<ResponseData>(url, data, this.httpOptions);
   }
 }

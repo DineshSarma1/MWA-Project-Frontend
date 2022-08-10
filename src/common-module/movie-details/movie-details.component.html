@@ -7,16 +7,25 @@
           <mat-card-title>{{ movie.title }} </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <span style="color: rgb(240, 199, 13)">
+          <span style="color: rgb(240, 199, 13); padding: 5px">
             <mat-icon>star</mat-icon>
           </span>
-          <label style="font-size: 20px"> 8.2 </label>
-          <span style="color: rgb(29, 140, 209)">
-            <mat-icon>star_border</mat-icon>
+          <label style="font-size: 20px; padding: 40px">
+            <ng-container *ngIf="movie.ratings">
+              {{ getRating(movie.ratings) | number: "1.1-1" }}
+            </ng-container>
+          </label>
+          <span style="color: rgb(29, 140, 209); padding: 5px">
+            <a
+              color="accent"
+              (click)="openDialogForRating(movie._id, movie.title)"
+              ><mat-icon>star_border</mat-icon></a
+            >
+            <!-- <mat-icon>star_border</mat-icon> -->
           </span>
-          <span style="color: rgb(222, 27, 203)">
+          <!-- <span style="color: rgb(222, 27, 203)">
             <mat-icon>favorite_border</mat-icon>
-          </span>
+          </span> -->
           <h5>Release Date: {{ movie.release_date | date }}</h5>
           <h6>Duration: {{ movie.length }}</h6>
         </mat-card-content>

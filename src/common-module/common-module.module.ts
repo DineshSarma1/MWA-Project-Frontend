@@ -8,12 +8,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { SafePipe } from 'src/__pipe/SafePipe';
+import { MovieRatingComponent } from './movie-rating/movie-rating.component';
 @NgModule({
   declarations: [
     MovieListComponent,
     MovieDetailsComponent,
     PersonDetailsComponent,
     SafePipe,
+    MovieRatingComponent,
   ],
   imports: [
     CommonModule,

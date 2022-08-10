@@ -12,27 +12,21 @@
           <mat-card-title>{{ movie.title }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <span style="color: rgb(240, 199, 13)">
+          <span style="color: rgb(240, 199, 13); padding: 5px">
             <mat-icon>star</mat-icon>
           </span>
-          <label style="font-size: 20px" *ngVar="0 as rating">
-            8.2
-            <!-- <ng-container *ngIf="movie.ratings">
-              <div *ngFor="let r of movie.ratings; let i = index">
-                <span>{{ rating + r.rating_point }}</span>
-                <span style="display: none">{{
-                  rating + r.rating_point | number
-                }}</span>
-              </div>
-            </ng-container> -->
+          <label style="font-size: 20px; padding: 5px">
+            <ng-container *ngIf="movie.ratings">
+              {{ getRating(movie.ratings) | number: "1.2-2" }}
+            </ng-container>
           </label>
-          <span style="color: rgb(29, 140, 209)">
-            <mat-icon>star_border</mat-icon>
+          <span style="color: rgb(29, 140, 209); padding: 40px">
+            <a
+              color="accent"
+              (click)="openDialogForRating(movie._id, movie.title)"
+              ><mat-icon>star_border</mat-icon></a
+            >
           </span>
-          <span style="color: rgb(222, 27, 203)">
-            <mat-icon>favorite_border</mat-icon>
-          </span>
-
           <p>
             {{
               movie.description.length > 50
@@ -51,5 +45,3 @@
     </div>
   </div>
 </div>
-
-<!-- <button (click)="passData()">Click</button> -->

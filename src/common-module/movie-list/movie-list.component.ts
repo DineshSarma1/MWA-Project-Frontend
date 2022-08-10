@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/service/common.service';
 import { environment } from '../../environments/environment';
-
+import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../service/data.service';
-
+import { MovieRatingComponent } from '../movie-rating/movie-rating.component';
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -18,7 +18,8 @@ export class MovieListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private api: CommonService,
-    private dataService: DataService
+    private dataService: DataService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +45,30 @@ export class MovieListComponent implements OnInit {
     this.router.navigateByUrl('common/movie-details');
   }
 
-  countRating(d: number) {
-    // return (this.rating += d);
+  openDialogForRating(movieId: any, title: string) {
+    let email = localStorage.getItem('user_email');
+    if (email == null || email == '' || email == undefined) {
+      this.router.navigateByUrl('/auth/login');
+      return;
+    }
+    const dialogRef = this.dialog.open(MovieRatingComponent, {
+      width: '500px',
+      data: {
+        movieId: movieId,
+        title: title,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  getRating(rating: any) {
+    let output = 0;
+    for (let i = 0; i < rating.length; i++) {
+      output += rating[i].rating_point;
+    }
+    return output / rating.length;
   }
 }
